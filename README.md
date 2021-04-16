@@ -14,7 +14,7 @@ sudo docker-compose exec php composer install
 To run console command:
 ```
 sudo docker-compose exec php php bin/console foo:hello
-git init
+
 sudo docker-compose exec php php bin/console bar:hi
 ```
 
