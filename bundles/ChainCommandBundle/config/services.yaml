@@ -1,0 +1,13 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Ivmak\ChainCommandBundle\Event\Listener\:
+    resource: '../src/Event/Listener/*'
+    autoconfigure: true
+
+  Ivmak\ChainCommandBundle\Service\:
+    resource: '../src/Service/*'

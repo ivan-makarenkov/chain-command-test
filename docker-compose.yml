@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  db:
+    container_name: db
+    image: mysql:5.7
+    ports: ['3306:3306']
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+    volumes:
+      - ./docker/.data/mysql:/var/lib/mysql
+  php:
+    container_name: php
+    build:
+      context: ./docker/php
+      args:
+        TIMEZONE: ${TIMEZONE}
+    ports: ['9000:9000']
+    volumes:
+      - ./:/var/www/symfony:cached
+  nginx:
+    container_name: nginx
+    build: ./docker/nginx
+    ports: ['80:80']
+    volumes:
+      - ./:/var/www/symfony:cached
+      - ./var/log/nginx/:/var/log/nginx
