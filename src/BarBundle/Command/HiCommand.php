@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\BarBundle\Command;
 
 use App\FooBundle\Command\HelloCommand;
-use Ivmak\ChainCommandBundle\Service\ChainCommandFollowerInterface;
+use Ivmak\ChainCommandBundle\Model\ChainCommandFollowerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

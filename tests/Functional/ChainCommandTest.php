@@ -7,7 +7,7 @@ namespace App\Tests\Functional;
 use App\Tests\Builder\FakeCommand;
 use App\Tests\Builder\FollowerCommand;
 use App\Tests\Builder\InitiatorCommand;
-use Ivmak\ChainCommandBundle\Service\ChainCommandInterface;
+use Ivmak\ChainCommandBundle\Model\ChainCommandInterface;
 use Ivmak\ChainCommandBundle\Service\ChainCommandManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;

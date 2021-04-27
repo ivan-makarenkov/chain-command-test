@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ivmak\ChainCommandBundle\Service;
+namespace Ivmak\ChainCommandBundle\Model;
 
 /**
  * Interface for command Follower(child)

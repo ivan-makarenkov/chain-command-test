@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Ivmak\ChainCommandBundle\Service;
 
 use Ivmak\ChainCommandBundle\Exception\RuntimeException;
+use Ivmak\ChainCommandBundle\Model\ChainCommandFollowerInterface;
+use Ivmak\ChainCommandBundle\Model\ChainCommandInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 
@@ -44,7 +46,7 @@ class ChainCommandManager
 
         if ($command instanceof ChainCommandFollowerInterface) {
             $this->logger->info(sprintf("%s registered as a member of %s command chain", $command->getName(), $command->getParent()));
-            $this->followers[$command->getParent()][$command->getPriority()] = $command->getName();
+            $this->followers[$command->getParent()][] = $command->getName();
         } else {
             $this->logger->info(sprintf("%s is a master command of a command chain that has registered member commands", $command->getName()));
         }
@@ -58,7 +60,6 @@ class ChainCommandManager
     {
         $followedCommandsList = [];
         $followers = $this->followers[$commandName]??[];
-        krsort($followers);
         foreach ($followers as $follower) {
             $followedCommandsList[] = $this->commands[$follower];
         }

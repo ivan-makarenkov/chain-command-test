@@ -11,3 +11,7 @@ services:
 
   Ivmak\ChainCommandBundle\Service\:
     resource: '../src/Service/*'
+
+  Ivmak\ChainCommandBundle\Service\ChainCommandManager:
+    arguments:
+      - !tagged_iterator { tag: ivmak.chain.command, default_priority_method: getPriority }

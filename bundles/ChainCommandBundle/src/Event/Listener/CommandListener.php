@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ivmak\ChainCommandBundle\Event\Listener;
 
-use Ivmak\ChainCommandBundle\Service\ChainCommandFollowerInterface;
-use Ivmak\ChainCommandBundle\Service\ChainCommandInitiatorInterface;
+use Ivmak\ChainCommandBundle\Model\ChainCommandFollowerInterface;
+use Ivmak\ChainCommandBundle\Model\ChainCommandInitiatorInterface;
 use Ivmak\ChainCommandBundle\Service\ChainCommandManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Application;
@@ -17,23 +17,7 @@ use Exception;
 
 class CommandListener implements EventSubscriberInterface
 {
-    protected Application $application;
-
-    public function __construct(private LoggerInterface $logger, private ChainCommandManager $manager)
-    {
-        $this->application = new Application();
-    }
-
-    /**
-     * Set application if it doesn't exist
-     * @param Application $application
-     */
-    public function setApplication(Application $application)
-    {
-        if ($this->application == null) {
-            $this->application = $application;
-        }
-    }
+    public function __construct(private LoggerInterface $logger, private ChainCommandManager $manager) {}
 
     /**
      * @param ConsoleCommandEvent $event
@@ -64,9 +48,10 @@ class CommandListener implements EventSubscriberInterface
         $command = $event->getCommand();
         if ($command instanceof ChainCommandInitiatorInterface) {
             $followedCommands = $this->manager->getFollowedCommandsByInitiator($command->getName());
+            $application = $command->getApplication();
             foreach ($followedCommands as $followedCommand) {
                 $this->logger->info(sprintf("Executing %s chain members:", $command->getName()));
-                $child = $this->application->add($followedCommand);
+                $child = $application->add($followedCommand);
                 $child->run($event->getInput(), $event->getOutput());
             }
             $this->logger->info(sprintf("Execution of %s chain completed.", $command->getName()));

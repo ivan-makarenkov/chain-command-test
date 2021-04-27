@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\FooBundle\Command;
 
-use Ivmak\ChainCommandBundle\Service\ChainCommandInitiatorInterface;
+use Ivmak\ChainCommandBundle\Model\ChainCommandInitiatorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
